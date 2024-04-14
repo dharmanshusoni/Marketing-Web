@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-2" >
+            <div class="card card-pointer mgTop5" style="width: 13rem;" routerLink="candidate-form">
+                <img src="../../../../assets/Images/default/add_user.png"  height="189px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title" style="text-align: center;">Candidate</h6>
+                    <!-- <p class="card-text">Click here</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2" *ngFor="let item of candidateList; let i = index" >
+            <div class="card card-pointer mgTop5" style="width: 13rem;"  routerLink="candidate-form/{{item.candidateId}}">
+                <img src="../../../../assets/Images/default/default_logo.svg" height="189px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title" style="display: inline-block;width: 180px;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">{{item.name}}</h6>
+                    <!-- <p class="card-text">{{item.email}}</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

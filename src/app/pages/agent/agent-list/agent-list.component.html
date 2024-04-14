@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="card card-pointer mgTop5" style="width: 13rem;" routerLink="agent-form">
+                <img src="../../../../assets/Images/default/add_user.png" height="189px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title" style="text-align: center;">Agent</h6>
+                    <!-- <p class="card-text">Click here</p> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2" *ngFor="let item of agentList; let i = index" >
+            <div class="card card-pointer mgTop5" style="width: 13rem;"  routerLink="agent-form/{{item.agentId}}">
+                <img [src]="createImgPath(item.profileImageUrl)" height="189px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title" style="display: inline-block;width: 180px;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;">{{item.name}}</h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

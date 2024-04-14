@@ -1,0 +1,27 @@
+<section class="">
+  <!-- <div id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white card" style="margin: 5px 0px 0px 0px;">
+    <div class="position-sticky" style="margin: 0px 0px 10px 0px;">
+      <div class="list-group list-group-flush mx-3 mt-2"  >
+        <a *ngFor="let item of menuData; let i = index" class="list-group-item list-group-item-action py-2 ripple"
+           routerLink="{{item.routerLink}}"
+           [ngClass]="{'active': selectedItem == item}" (click)="listClick($event, item)">
+          <i class="{{item.icon}}"></i> <span style="margin:0px 0px 0px 5px;">{{item.name}}</span>
+        </a>
+      </div>
+    </div>
+  </div> -->
+  <section style="width: 100%; float:right;">
+    <router-outlet></router-outlet>
+  </section>
+</section>
+
+<ng-template #login>
+  <div class="card mt-4 shadow">
+    <h4 class="card-header">You have been logged out</h4>
+    <div class="card-body">
+      <div class="m-2">
+        Please click <a routerLink="login">here</a> to login.
+      </div>
+    </div>
+  </div>
+</ng-template>

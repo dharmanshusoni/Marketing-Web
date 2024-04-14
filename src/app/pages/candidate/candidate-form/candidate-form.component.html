@@ -1,0 +1,287 @@
+<div class="container-fluid">
+    <!-- <div class="row carding">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+            aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="/client">Client</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Form</li>
+            </ol>
+        </nav>
+    </div> -->
+    <form #companyForm="ngForm" (ngSubmit)="save()">
+        <div class="row">
+
+            <div class="col-sm-10">
+
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Candidate Info</h5>
+                        <div class="col-sm-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" [(ngModel)]="candidateModel.name"
+                                name="name" #name="ngModel" placeholder="Name Ex. Sean paul" required maxlength="50">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-text error">
+                                <span *ngIf="name.errors?.['required']">
+                                    * Name is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="ipEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="ipEmail"
+                                [(ngModel)]="candidateModel.email" name="email" #email="ngModel"
+                                placeholder="Candidate email Ex. John@domain.com" required maxlength="50">
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-text error">
+                                <span *ngIf="email.errors?.['required']">
+                                    * Email is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="DOB" class="form-label">D.O.B.</label>
+                            <input type="date" [(ngModel)]="candidateModel.dob" id="DOB" class="form-control" name="date-field">
+                            <span>
+                               {{dobDate}}
+                            </span>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="Gender" class="form-label">Gender</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select Gender'" [settings]="dropdownSettings"
+                                name="gender" #gender="ngModel" [data]="genderList" [(ngModel)]="candidateModel.gender"
+                                (onSelect)="onItemSelect($event,'gender')" required>
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="form-text error">
+                                <span *ngIf="gender.errors?.['required']">
+                                    * gender is required.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Experiance</h5>
+                        <div class="col-sm-3">
+                            <label for="experience" class="form-label">No. of years</label>
+                            <input type="number" class="form-control" id="experience" [(ngModel)]="candidateModel.experience"
+                                name="experience" #experience="ngModel" placeholder="Experience Ex. 1,2..." required>
+                            <div *ngIf="experience.invalid && (experience.dirty || experience.touched)" class="form-text error">
+                                <span *ngIf="experience.errors?.['required']">
+                                    * Experience is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="expectedSalary" class="form-label">Expected Salary</label>
+                            <input type="number" class="form-control" id="expectedSalary"
+                                [(ngModel)]="candidateModel.expectedSalary" name="expectedSalary" #expectedSalary="ngModel"
+                                placeholder="Candidate email Ex. John@domain.com" required>
+                            <div *ngIf="expectedSalary.invalid && (expectedSalary.dirty || expectedSalary.touched)" class="form-text error">
+                                <span *ngIf="expectedSalary.errors?.['required']">
+                                    * Salary is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="qualifications" class="form-label">Highest Qualification</label>
+
+                            <ng-multiselect-dropdown [placeholder]="'Select Qualification'" [settings]="dropdownSettings"
+                                name="qualifications" #qualifications="ngModel" [data]="qualificationList" [(ngModel)]="candidateModel.qualifications"
+                                (onSelect)="onItemSelect($event,'qualifications')" required>
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="qualifications.invalid && (qualifications.dirty || qualifications.touched)" class="form-text error">
+                                <span *ngIf="qualifications.errors?.['required']">
+                                    * Qualification is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- *ngIf="candidateModel.qualifications.length>0" -->
+                        <div class="col-sm-3"  >
+                            <label for="qualification" class="form-label">Mention Qualification</label>
+                            <input type="text" class="form-control" id="qualification"
+                                [(ngModel)]="candidateModel.qualification" name="qualification" #qualification="ngModel"
+                                placeholder="Candidate qualification">
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="languages" class="form-label">Languages</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select Languages'" [settings]="dropdownSettings"
+                                name="languages" #languages="ngModel" [data]="languagesList" [(ngModel)]="candidateModel.languages"
+                                (onSelect)="onItemSelect($event,'languages')" required>
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="languages.invalid && (languages.dirty || languages.touched)" class="form-text error">
+                                <span *ngIf="languages.errors?.['required']">
+                                    * Languages is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="skills" class="form-label">Skills</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select Skills'" [settings]="dropdownSettings"
+                                name="skills" #skills="ngModel" [data]="skillsList" [(ngModel)]="candidateModel.skills"
+                                (onSelect)="onItemSelect($event,'skills')" required>
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="skills.invalid && (skills.dirty || skills.touched)" class="form-text error">
+                                <span *ngIf="skills.errors?.['required']">
+                                    * Skills is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- *ngIf="candidateModel.skills.length>0" -->
+                        <div class="col-sm-6"  >
+                            <label for="otherSkills" class="form-label">Mention skills</label>
+                            <input type="text" class="form-control" id="otherSkills"
+                                [(ngModel)]="candidateModel.otherSkills" name="otherSkills" #otherSkills="ngModel"
+                                placeholder="Candidate Mention all skills">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Contact</h5>
+                        <div class="col-sm-4">
+                            <label for="ipCandidateName" class="form-label">Contact No.</label>
+                            <input type="text" class="form-control" id="ipCandidateName"
+                                [(ngModel)]="candidateModel.contactNo" name="contactNo" #contactNo="ngModel"
+                                placeholder="Candidate official contact no." required minlength="6" maxlength="13">
+                            <div *ngIf="contactNo.invalid && (contactNo.dirty || contactNo.touched)"
+                                class="form-text error">
+                                <span *ngIf="contactNo.errors?.['required']">
+                                    * contact No is required.
+                                </span>
+                                <span *ngIf="contactNo.errors?.['minlength'] || contactNo.errors?.['maxlength']">
+                                    * Invalid contact no.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="ipClientAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="ipClientAddress"
+                                [(ngModel)]="candidateModel.address" name="address" #address="ngModel"
+                                placeholder="Company headquarter/office address" required maxlength="50">
+                            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="form-text error">
+                                <span *ngIf="address.errors?.['required']">
+                                    * Address is required.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="ipClientZipcode" class="form-label">Zipcode</label>
+                            <input type="text" class="form-control" id="ipClientZipcode"
+                                [(ngModel)]="candidateModel.zipcode" name="zipcode" #zipcode="ngModel"
+                                placeholder="Address Zipcode" required maxlength="10">
+                            <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)" class="form-text error">
+                                <span *ngIf="zipcode.errors?.['required']">
+                                    * Zipcode is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="ipClientCountry" class="form-label">Country</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select country'" [settings]="dropdownSettings"
+                                name="country" #country="ngModel" [data]="countryList"
+                                [(ngModel)]="candidateModel.country" (onSelect)="onItemSelect($event,'country')"
+                                required>
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="country.invalid && (country.dirty || country.touched)" class="form-text error">
+                                <span *ngIf="country.errors?.['required']">
+                                    * Country is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-sm-6"></div> -->
+                        <div class="col-sm-4">
+                            <label for="ipClientState" class="form-label">State</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select state'" [settings]="dropdownSettings"
+                                name="state" #state="ngModel" [data]="stateList" [(ngModel)]="candidateModel.state"
+                                (onSelect)="onItemSelect($event,'state')" required>
+                                <!-- (onSelectAll)="onSelectAll($event) -->
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="form-text error">
+                                <span *ngIf="state.errors?.['required']">
+                                    * State is required.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="ipClientCity" class="form-label">City</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select city'" [settings]="dropdownSettings"
+                                name="city" #city="ngModel" [data]="cityList" [(ngModel)]="candidateModel.city"
+                                (onSelect)="onItemSelect($event,'city')" required>
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="form-text error">
+                                <span *ngIf="city.errors?.['required']">
+                                    * City is required.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Business</h5>
+                        <div class="col-sm-12">
+                            <!-- <div class="form-floating">
+                            <textarea class="form-control" id="floatingTextarea2" name="businessDetails" [(ngModel)]="candidateModel.companyDetail" 
+                            #businessDetails="ngModel" maxlength="500"
+                                style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Give some description on clients business work and genre (maximum 500 char)</label>
+                        </div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-2">
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Actions</h5>
+                        <div class="d-grid gap-2">
+                            <!-- [disabled]="companyForm.invalid" -->
+                            <button class="btn btn-success btn-sm" type="submit"><i class="bi bi-save"></i>
+                                Save</button>
+                            <button class="btn btn-warning btn-sm" hidden type="button"><i class="bi bi-save"></i>
+                                Update</button>
+                            <button class="btn btn-outline-dark btn-sm" type="button" (click)="form.reset();"
+                                routerLink="/candidate"><i class="bi-arrow-left-circle"></i> Back</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mgTop5" *ngIf="isEdit">
+                    <div class="row card-body">
+                        <h5 class="card-title">Logo</h5>
+                        <img src="../../../../assets/Images/default/default_logo.svg" class="img-thumbnail" alt="logo">
+                    </div>
+                </div>
+                <div class="card mgTop5" *ngIf="isEdit">
+                    <div class="row card-body">
+                        <h5 class="card-title">Documents</h5>
+                        <span><i class="bi bi-file-earmark-pdf"></i> clients_work.pdf</span>
+                        <span><i class="bi bi-file-earmark-word"></i> clients_profile.docx</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

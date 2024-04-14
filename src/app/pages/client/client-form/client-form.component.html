@@ -1,0 +1,218 @@
+<div class="container-fluid">
+    <!-- <div class="row carding">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+            aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="/client">Client</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Form</li>
+            </ol>
+        </nav>
+    </div> -->
+    <form #companyForm="ngForm" (ngSubmit)="save()">
+        <div class="row">
+
+            <div class="col-sm-10">
+
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Client Info</h5>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="name" [(ngModel)]="companyClientModel.name"
+                                name="name" #name="ngModel" placeholder="Company name Ex. My Company Pvt. Ltd." required
+                                maxlength="50">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-text error">
+                                <span *ngIf="name.errors?.['required']">
+                                    * Company name is required.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="email" class="form-control" id="ipClientEmail"
+                                [(ngModel)]="companyClientModel.email" name="email" #email="ngModel"
+                                placeholder="Client email company's email Ex. John@domain.com"
+                                aria-describedby="emailHelp" required maxlength="50">
+                            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-text error">
+                                <span *ngIf="email.errors?.['required']">
+                                    * Email is required.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Contact</h5>
+                        <div class="col-sm-6">
+                            <label for="ipContactPersonName" class="form-label">Contact Person Name</label>
+                            <input type="text" class="form-control" id="ipContactPersonName"
+                                [(ngModel)]="companyClientModel.contactPerson" name="contactPerson"
+                                #contactPerson="ngModel" placeholder="Contact person name Ex. John" required
+                                maxlength="50">
+                            <div *ngIf="contactPerson.invalid && (contactPerson.dirty || contactPerson.touched)"
+                                class="form-text error">
+                                <span *ngIf="contactPerson.errors?.['required']">
+                                    * Contact person is required.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="ipClientContact" class="form-label">Contact No.</label>
+                            <input type="text" class="form-control" id="ipClientContact"
+                                [(ngModel)]="companyClientModel.contactNo" name="contactNo" #contactNo="ngModel"
+                                placeholder="Company official contact no." required minlength="6" maxlength="13">
+                            <div *ngIf="contactNo.invalid && (contactNo.dirty || contactNo.touched)"
+                                class="form-text error">
+                                <span *ngIf="contactNo.errors?.['required']">
+                                    * contact No is required.
+                                </span>
+                                <span *ngIf="contactNo.errors?.['minlength'] || contactNo.errors?.['maxlength']">
+                                    * Invalid contact no.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="ipClientAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="ipClientAddress"
+                                [(ngModel)]="companyClientModel.address" name="address" #address="ngModel"
+                                placeholder="Company headquarter/office address" required maxlength="50">
+                            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="form-text error">
+                                <span *ngIf="address.errors?.['required']">
+                                    * Address is required.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="ipClientZipcode" class="form-label">Zipcode</label>
+                            <input type="text" class="form-control" id="ipClientZipcode"
+                                [(ngModel)]="companyClientModel.zipcode" name="zipcode" #zipcode="ngModel"
+                                placeholder="Address Zipcode" required maxlength="10">
+                            <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)" class="form-text error">
+                                <span *ngIf="zipcode.errors?.['required']">
+                                    * Zipcode is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="ipClientCountry" class="form-label">Country</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select country'" [settings]="dropdownSettings"
+                                name="country" #country="ngModel" [data]="countryList"
+                                [(ngModel)]="companyClientModel.country" (onSelect)="onItemSelect($event,'country')"
+                                required>
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="country.invalid && (country.dirty || country.touched)" class="form-text error">
+                                <span *ngIf="country.errors?.['required']">
+                                    * Country is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-sm-6"></div> -->
+                        <div class="col-sm-4">
+                            <label for="ipClientState" class="form-label">State</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select state'" [settings]="dropdownSettings"
+                                name="state" #state="ngModel" [data]="stateList" [(ngModel)]="companyClientModel.state"
+                                (onSelect)="onItemSelect($event,'state')" required>
+                                <!-- (onSelectAll)="onSelectAll($event) -->
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="form-text error">
+                                <span *ngIf="state.errors?.['required']">
+                                    * State is required.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="ipClientCity" class="form-label">City</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select city'" [settings]="dropdownSettings"
+                                name="city" #city="ngModel" [data]="cityList" [(ngModel)]="companyClientModel.city"
+                                (onSelect)="onItemSelect($event,'city')" required>
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="form-text error">
+                                <span *ngIf="city.errors?.['required']">
+                                    * City is required.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Business</h5>
+                        <div class="col-sm-12">
+                            <!-- <div *ngIf="businessDetails.invalid && (businessDetails.dirty || businessDetails.touched)" class="form-text error">
+                            <span *ngIf="businessDetails.errors?.['maxlength']">
+                                * Details should max 500 char.
+                            </span>
+                        </div> -->
+                            <div class="form-floating">
+                                <textarea class="form-control" id="floatingTextarea2" name="businessDetails"
+                                    [(ngModel)]="companyClientModel.companyDetail" #businessDetails="ngModel"
+                                    maxlength="500" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Give some description on clients business work and genre
+                                    (maximum 500 char)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-2">
+                <div class="card mgTop5">
+                    <div class="row card-body">
+                        <h5 class="card-title">Actions</h5>
+                        <div class="d-grid gap-2">
+                            <!-- [disabled]="companyForm.invalid" -->
+                            <button class="btn btn-success btn-sm" type="submit"><i class="bi bi-save"></i>
+                                Save</button>
+                            <button class="btn btn-warning btn-sm" hidden type="button"><i class="bi bi-save"></i>
+                                Update</button>
+                            <button class="btn btn-outline-dark btn-sm" type="button" (click)="form.reset();"
+                                routerLink="/client"><i class="bi-arrow-left-circle"></i> Back</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- *ngIf="isEdit" -->
+                <div class="card mgTop5" >
+                    <div class="row card-body">
+                        <h5 class="card-title">Logo</h5>
+                        <img [src]="createImgPath(companyClientModel.profileImageUrl)" alt="logo" height="250px" width="250px">
+                        <div class="col-md-12">
+                            <input type="file" accept="image/*" #file placeholder="Choose file"
+                                (change)="uploadFile(file.files)" style="display:none;">
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-success btn-sm" (click)="file.click()"><i
+                                        class="bi bi-cloud-arrow-up"></i> Select Image</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mgTop5" *ngIf="isEdit">
+                    <div class="row card-body">
+                        <h5 class="card-title">Documents</h5>
+                        <span><i class="bi bi-file-earmark-pdf"></i> clients_work.pdf</span>
+                        <span><i class="bi bi-file-earmark-word"></i> clients_profile.docx</span>
+                        <!-- <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-success btn-sm" ><i class="bi bi-plus"></i> Upload Document</button>
+                        </div> -->
+                        <div class="col-md-12">
+                            <input type="file" accept="application/pdf" #document placeholder="Choose file"
+                                (change)="uploadDocument(document.files)" style="display:none;">
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-success btn-sm" (click)="document.click()"><i class="bi bi-plus"></i> Upload Document</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

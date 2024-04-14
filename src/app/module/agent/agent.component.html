@@ -1,0 +1,16 @@
+<section class="">
+  <section style="width: 100%; float:right;">
+    <router-outlet></router-outlet>
+  </section>
+</section>
+
+<ng-template #login>
+  <div class="card mt-4 shadow">
+    <h4 class="card-header">You have been logged out</h4>
+    <div class="card-body">
+      <div class="m-2">
+        Please click <a routerLink="login">here</a> to login.
+      </div>
+    </div>
+  </div>
+</ng-template>

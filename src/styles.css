@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import 'ngx-toastr/toastr';
+
+html,
+body {
+  /*  height: 100%; */
+  width: 100%;
+  margin: 0;
+  /* overflow: hidden; */
+  background-color: #f3f3f3;
+}
+
+.app-primary-dark{
+  background-color: #006064;
+}
+
+.app-primary{
+  background-color: #00838F;
+}
+
+.btn-success{
+  background-color: #00838F;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active,.btn-success:disabled, .btn-success.active, .open>.dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #006064;
+  border-color: #006064; /*set the color you want here*/
+}
+
+.mgTop5{
+  margin: 5px 0px 0px 0px;
+}
+
+.card-pointer{
+  cursor: pointer;
+}
+.carding {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+}
+
+.error{
+color: red;
+}
